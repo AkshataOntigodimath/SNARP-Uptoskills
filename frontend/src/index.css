@@ -3028,3 +3028,32 @@ button {
 .rm-match-reason strong {
   color: #60469a;
 }
+
+/* Save and Clear Profile buttons */
+.rm-profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rm-clear-button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #d9534f;
+  border-radius: 10px;
+  background: transparent;
+  color: #d9534f;
+  font-size: 19px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.rm-clear-button:hover {
+  background: #d9534f;
+  color: white;
+}
+
+.rm-clear-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

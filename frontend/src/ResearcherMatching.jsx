@@ -190,6 +190,17 @@ export default function ResearcherMatching() {
     }
   }
 
+  // Clear the form without deleting the saved database profile.
+  function clearProfileForm() {
+    setProfile({ ...EMPTY_PROFILE })
+    setSkillsInput('')
+    setSmartFillError('')
+    setError('')
+    setMessage(
+      'Profile form cleared. You can generate AI suggestions again!'
+    )
+  }
+
   async function saveProfile(event) {
     event.preventDefault()
 
@@ -462,11 +473,6 @@ export default function ResearcherMatching() {
           <div className="rm-smart-fill">
             <h4>✨ AI-Powered Profile Assistant</h4>
 
-            <p>
-              Generate profile suggestions by analysing all
-              your uploaded research papers.
-            </p>
-
             <button
               type="button"
               className="rm-button"
@@ -581,16 +587,29 @@ export default function ResearcherMatching() {
             </select>
           </label>
 
-          <button
-            className="rm-button"
-            type="submit"
-            disabled={savingProfile || smartFilling}
-          >
-            {savingProfile ? 'Saving...' : 'Save Profile'}
-          </button>
+          {/* Save and Clear Profile Buttons */}
+          <div className="rm-profile-actions">
+            <button
+              className="rm-button"
+              type="submit"
+              disabled={savingProfile || smartFilling}
+            >
+              {savingProfile ? 'Saving...' : 'Save Profile'}
+            </button>
+
+            <button
+              className="rm-clear-button"
+              type="button"
+              onClick={clearProfileForm}
+              disabled={savingProfile || smartFilling}
+              title="Clear all profile fields"
+              aria-label="Clear profile form"
+            >
+              🗑️
+            </button>
+          </div>
         </form>
       </section>
-
       {/* Recommended Researchers */}
       <section className="rm-section">
         <h3>Recommended Researchers</h3>
@@ -723,6 +742,7 @@ export default function ResearcherMatching() {
           </div>
         )}
       </section>
+
       {/* Collaboration Requests */}
       <section className="rm-section">
         <h3>Collaboration Requests</h3>
